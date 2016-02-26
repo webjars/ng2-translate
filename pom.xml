@@ -1,0 +1,92 @@
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
+  <packaging>jar</packaging>
+  <groupId>org.webjars</groupId>
+  <artifactId>ng2-translate</artifactId>
+  <version>1.7.3</version>
+  <name>ng2-translate</name>
+  <description>WebJar for ng2-translate</description>
+  <url>http://webjars.org</url>
+  <scm>
+    <url>http://github.com/webjars/ng2-translate</url>
+    <connection>scm:git:https://github.com/webjars/ng2-translate.git</connection>
+    <developerConnection>scm:git:https://github.com/webjars/ng2-translate.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+  <developers>
+    <developer>
+      <id>ocombe</id>
+      <name>Olivier Combe</name>
+    </developer>
+  </developers>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <upstream.version>1.7.3</upstream.version>
+    <upstream.artifactId>ng2-translate</upstream.artifactId>
+    <upstream.url>https://github.com/ocombe/ng2-translate/archive/v${upstream.version}.zip</upstream.url>
+    <destDir>${project.build.outputDirectory}/META-INF/resources/webjars/${project.artifactId}/${project.version}</destDir>
+    <requirejs>
+      {
+        "paths": {
+          "ng2-translate": "ng2-translate",
+        },
+        "shim": {
+          "ng2-translate": {
+            "deps": ["angular2"],
+            "exports": "ng2-translate"
+          }
+        }
+      }
+    </requirejs>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <echo message="download archive"/>
+                <get src="${upstream.url}" dest="${project.build.directory}/${project.artifactId}.zip"/>
+                <echo message="unzip archive"/>
+                <unzip src="${project.build.directory}/${project.artifactId}.zip" dest="${project.build.directory}"/>
+                <echo message="moving resources"/>
+                <move todir="${destDir}">
+                    <fileset dir="${project.build.directory}/${project.artifactId}-${upstream.version}" />
+                </move>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.6</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>sonatype-nexus-staging</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
