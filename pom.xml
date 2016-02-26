@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
   <groupId>org.webjars</groupId>
   <artifactId>ng2-translate</artifactId>
-  <version>1.7.3</version>
+  <version>1.7.3-SNAPSHOT</version>
   <name>ng2-translate</name>
   <description>WebJar for ng2-translate</description>
   <url>http://webjars.org</url>
@@ -64,7 +64,7 @@
                 <unzip src="${project.build.directory}/${project.artifactId}.zip" dest="${project.build.directory}"/>
                 <echo message="moving resources"/>
                 <move todir="${destDir}">
-                    <fileset dir="${project.build.directory}/${project.artifactId}-${upstream.version}" />
+                    <fileset dir="${project.build.directory}/${project.artifactId}-${upstream.version}/bundles" />
                 </move>
               </target>
             </configuration>
