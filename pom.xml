@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
   <groupId>org.webjars</groupId>
   <artifactId>ng2-translate</artifactId>
-  <version>1.7.3</version>
+  <version>1.7.4-SNAPSHOT</version>
   <name>ng2-translate</name>
   <description>WebJar for ng2-translate</description>
   <url>http://webjars.org</url>
@@ -16,7 +16,7 @@
     <url>http://github.com/webjars/ng2-translate</url>
     <connection>scm:git:https://github.com/webjars/ng2-translate.git</connection>
     <developerConnection>scm:git:https://github.com/webjars/ng2-translate.git</developerConnection>
-    <tag>ng2-translate-1.7.3</tag>
+    <tag>HEAD</tag>
   </scm>
   <developers>
     <developer>
